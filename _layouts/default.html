@@ -153,27 +153,18 @@ layout: table_wrappers
         {% else %}
           {{ content }}
         {% endif %}
-
-          {% if page.url == "/" %}
-              <ul>
-                {% for post in site.html_pages %}
-                {% assign postDepth = post.url | split: "/" %}
-                {% if postDepth.size >= 4 %}
-                    <li>
-                      <a href="{{ post.url }}">{{ post.title }}</a>
-                    </li>
-                    {% endif %}
-                {% endfor %}
-              </ul>
-          {% endif %}
-
         {% if page.has_children == true and page.has_toc != false %}
           <hr>
           <h2 class="text-delta">Table of contents</h2>
           <ul>
             {% for child in toc_list %}
               <li id="child-overview">
-                <a href="{{ child.url | relative_url }}">{{ child.title }}</a>{% if child.summary %} - {{ child.summary }}{% endif %}
+                <a href="{{ child.url | relative_url }}">{{ child.title }}
+                  {% if child.last_modified_at %}
+                  <span style="color: #a1a1a1fc;">{{ child.last_modified_at }}</span>
+                  {% endif %} 
+                 </a>
+                 {% if child.summary %} - {{ child.summary }}{% endif %}
               </li>
             {% endfor %}
           </ul>
