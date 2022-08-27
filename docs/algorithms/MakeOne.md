@@ -61,21 +61,57 @@ last_modified_at: "22.08.26"
 3
 ```
 ---
-## 접근 방식
-<br>
-한번에 풀었다 ㅎㅅㅎ<br>
-다만 memoization을 하지 않아 이 이부분이 들어가면 더 좋을 것 같다.
-
----
 ## 풀이 방식
 <br>
-세가지 연산을 모두 다 해보지만<br>
-작은 수일 때 연산하는 최솟값을 저장해놓으면 큰수를 구할 수 있다.<br>
-d[x] = x가 1이 되는 최소 연산 횟수
+한번에 풀었지만 풀이 방식을 다르게 해서 Top-Down 방식으로 다시 풀어보았다.<br>
+세가지 연산을 모두 하면서 값을 memoization 해놓았다가 해당값이 있으면 바로 리턴한다.<br>
+- d[x] = x가 1이 되는 최소 연산 횟수
 
 
 ---
 
+## Top-Down 방식
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static int[] d;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        d = new int[n+1];
+        System.out.println(makeOne(n));
+    }
+
+    private static int makeOne(int n) {
+        System.out.println(n);
+        if (n == 1)
+            return 0;
+
+        if (d[n] > 0) {
+            return d[n];
+        }
+
+        d[n] = makeOne(n-1) + 1;
+
+        if (n%3 == 0) {
+            int temp = makeOne(n/3) + 1;
+            if (d[n] > temp) {
+                d[n] = temp;
+            }
+        }
+
+        if (n%2 == 0) {
+            int temp = makeOne(n/2) + 1;
+            if (d[n] > temp) {
+                d[n] = temp;
+            }
+        }
+
+        return d[n];
+    }
+}
+```
 ## 내가 푼 코드
 ```java
 import java.util.Scanner;
