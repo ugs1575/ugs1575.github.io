@@ -2,7 +2,7 @@
 layout: default
 title: BOJ 1463_1로 만들기
 parent: Algorithms
-last_modified_at: "22.08.26"
+last_modified_at: "22.08.27"
 ---
 
 # [백준] 1463번 1로 만들기
