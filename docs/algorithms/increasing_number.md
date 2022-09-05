@@ -2,7 +2,7 @@
 layout: default
 title: BOJ 11057_오르막 수
 parent: Algorithms
-last_modified_at: "22.09.01"
+last_modified_at: "22.09.05"
 ---
 
 # [백준] 11057번 오르막 수
@@ -70,29 +70,25 @@ last_modified_at: "22.09.01"
 ---
 ## 접근 방식
 <br>
-2차원 배열을 사용할 생각을 못 했던 것 같다.<br>
--1, +1 차이가 나는 숫자가 온다까지 접근은 했는데 이걸 어떻게 코드로 풀어낼까 답이 안 나왔다.
+- d[n][l] = n 자리이면서 마지막 자리가 l인 경우의 수로 정의했다.
+- 오르막 수는 현재 자리보다 이전 자리에 같은 숫자 또는 작은 숫자가 오면 된다.
 
----
+나는 이걸 아래와 차이로 접근해서 틀려버렸다
+d[n][l] = d[n-1][l-0] + d[n-1][l-9] ..
 
-## 풀이 방식
-- d[n][l] = n 자리 계단이면서 마지막 수가 l인 경우의 수
-- d[n][l] = d[n-1][l-1] + d[n-1][l+1]
-- n 자리 계단이면서 마지막 수가 l인 경우는 아래 두 가지 경우의 수를 더해주면 된다.
-- n-1 자리면서 l보다 1 작은 수가 오는 경우의 수와
-- n-1 자리면서 l보다 1 큰 수가 오는 경우의 수
-- 주의할 점은 l이 0이거나 9일 때인데 이 부분은 예외 처리를 해주면 된다.
+또 마지막에 전체 합을 구하는 부분에서 integer 타입으로 정의하고 10007로 나눈 나머지 값을 구하지 않았다.
+
+어차피 n-1 자리의 마지막 수는 0부터 l까지의 값이 되기 때문에 굳이 차이로 접근하지 않아도 됐었다.
 
 ---
 
 ## Bottom-up 방식
 ```java
-package dynamic;
-
 import java.util.Scanner;
 
 public class Main {
     public static final long MOD = 10007L;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -104,20 +100,18 @@ public class Main {
 
         for (int i = 2; i <= n; i++) {
             for (int j = 0; j <= 9; j++) {
-                for (int k = 0; k <= 9; k++) {
-                    if (j-k >= 0) {
-                        d[i][j] += d[i-1][j-k];
-                    }
+                for (int k = 0; k <= j; k++) {
+                    d[i][j] += d[i-1][k];
                 }
                 d[i][j] %= MOD;
             }
         }
 
-        int ans = 0;
+        long ans = 0L;
         for (int j = 0; j <= 9; j++) {
             ans += d[n][j];
         }
-
+        ans %= MOD;
         System.out.println(ans);
     }
 }
