@@ -10,5 +10,8 @@ services:
       - .:/usr/src/app
     stdin_open: true
     tty: true
-    command: bundle exec jekyll serve -H 0.0.0.0 -t
-
+    entrypoint: [ "sh", "-c" ]
+    command:
+      - |
+        bundle install
+        bundle exec jekyll serve -H 0.0.0.0 -t
