@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Etc
-nav_order: 3
+nav_order: 5
 has_children: true
 permalink: docs/etc
 ---
