@@ -18,44 +18,12 @@ last_modified_at: "22.11.05"
 </details>
 
 ---
-## 문제
-$n \choose m$의 끝자리 $0$의 개수를 출력하는 프로그램을 작성하시오.
-
-- 문제링크 :
-<a href="https://www.acmicpc.net/problem/1676">https://www.acmicpc.net/problem/1676
+## 문제링크
+<a href="https://www.acmicpc.net/problem/2004">https://www.acmicpc.net/problem/2004
 </a>
 
 ---
-## 입력
-첫째 줄에 N이 주어진다. (0 ≤ N ≤ 500)
-
----
-## 출력
-첫째 줄에 구한 0의 개수를 출력한다.
-
----
-## 예제 입력 1
-
-```
-입력
-10
-
-출력
-2
-```
-
-## 예제 입력 2
-
-```
-입력
-3
-
-출력
-0
-```
-
----
-## 풀이 방식
+## 풀이방식
 
 - $\frac{n!}{m!(n-m)!}$
 - 2x5 = 10, N!를 소인수 분해 했을 때 2x5 조합이 몇개 나오는지 알면된다.
@@ -63,7 +31,7 @@ $n \choose m$의 끝자리 $0$의 개수를 출력하는 프로그램을 작성�
 
 ---
 
-## 풀이 방식 코드
+## 코드
 ```java
 import java.util.Scanner;
 
